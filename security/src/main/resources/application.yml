@@ -1,0 +1,55 @@
+server:
+  servlet:
+    context-path: /secur
+  port : 8082 #comentar para el pase a weblogic
+  max-http-header-size: 1MB
+
+# ===============================
+# = DATA SOURCE ORACLE
+# ===============================
+
+#configuracion oracle basica
+
+spring:
+  #conexion primaria y por defecto al geocampo
+  datasource:
+    # url: jdbc:postgresql://apps.net-consultores.com:54320/db_gcsurvey
+    url: jdbc:postgresql://localhost:5432/security-db
+    username: postgres
+    password: 12345678
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 5
+      max-lifetime: 30000 # 30 segundos
+    #jndi-name: jdbc/geocampo
+    sql-script-encoding: UTF-8
+  jpa:
+    # properties:
+    #   hibernate:
+    #     default_schema: public
+    hibernate:
+        ddl-auto: update
+        #default_schema: geocampo
+    database-platform: org.hibernate.dialect.PostgreSQLDialect # dialecto SQL que Hibernate utilizará para traducir las consultas JPQL a SQL 
+    show-sql: true
+
+  servlet:
+    multipart:
+      max-file-size: 199MB
+      max-request-size: 199MB
+
+# App Properties
+bezkoder:
+  app:
+    jwtSecret: ======================BezKoder=Spring===========================
+    jwtExpirationMs: 86400000
+
+#CONFIGURAR DE LOS LOGS POR DEFAULT EL FILE MAX SIZE SON 10MB
+logging:
+  level:
+    root: INFO
+    com.memorynotfound: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.hibernate.SQL: debug

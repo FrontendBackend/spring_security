@@ -1,0 +1,9 @@
+Link: https://www.bezkoder.com/spring-boot-jwt-authentication/
+
+En este tutorial, crearemos una aplicación Spring Boot compatible con la autenticación basada en tokens con JWT. Aprenderás:
+
+Flujo apropiado para el registro e inicio de sesión de usuarios con autenticación JWT
+Arquitectura de aplicaciones Spring Boot con Spring Security
+Cómo configurar Spring Security para trabajar con JWT
+Cómo definir modelos de datos y asociación para autenticación y autorización
+Forma de utilizar Spring Data JPA para interactuar con la base de datos PostgreSQL/MySQL
