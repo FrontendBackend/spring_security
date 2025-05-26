@@ -3,6 +3,7 @@ package com.backend.security.controllers;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,14 +59,21 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+        UUID accessTokenId = UUID.randomUUID();
+
+        String accessToken = jwtUtils.generateJwtToken(authentication, accessTokenId);
+        String refreshToken = jwtUtils.generateRefreshToken((UserDetailsImpl) authentication.getPrincipal(),
+                accessTokenId);
+
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt,
+        return ResponseEntity.ok(new JwtResponse(
+                accessToken, refreshToken,
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),

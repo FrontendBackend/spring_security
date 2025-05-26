@@ -40,10 +40,11 @@ spring:
       max-request-size: 199MB
 
 # App Properties
-bezkoder:
+jvale:
   app:
-    jwtSecret: ======================BezKoder=Spring===========================
+    jwtSecret: ======================jvale=Spring===========================
     jwtExpirationMs: 86400000
+    jwtRefreshExpirationMs: 604800000
 
 #CONFIGURAR DE LOS LOGS POR DEFAULT EL FILE MAX SIZE SON 10MB
 logging:
